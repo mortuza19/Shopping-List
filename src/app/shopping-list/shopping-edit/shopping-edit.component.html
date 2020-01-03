@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form #shoppingEdit="ngForm" (ngSubmit)="onAdd()">
+            <div class="row">
+                <div class="col-sm-5 form-group">
+                    <label for="name">Name<span style="color: red;">*</span></label>
+                    <input
+                        ngModel
+                        required
+                        duplicateIngredient
+                        #ingredient="ngModel" 
+                        name="ingredient"
+                        type="text" 
+                        id="name" 
+                        class="form-control"
+                        [class.is-invalid]="ingredient.invalid && ingredient.touched"
+                        placeholder="ingredients...">
+                        <div *ngIf="ingredient.invalid && ingredient.touched">
+                            <small class="danger" *ngIf="ingredient.errors.required;else ngtvAmount">Please add a name!</small>
+                            <ng-template #ngtvAmount><small class="danger" *ngIf="ingredient.errors.duplicateIngredient">Ingredient is already existing</small></ng-template>
+                        </div>
+                </div>
+                <div class="col-sm-3 form-group">
+                    <label for="amount">Amount<span style="color: red;">*</span></label>
+                    <input
+                        required
+                        #amount="ngModel"
+                        ngModel
+                        nonAmount
+                        name="amount" 
+                        type="number" 
+                        id="amount" 
+                        class="form-control"
+                        [class.is-invalid]="amount.invalid && amount.touched"
+                        placeholder="quantity..">
+                        <div *ngIf="amount.invalid && amount.touched">
+                            <small class="danger" *ngIf="amount.errors.required;else ngtvAmount">Please add amount!</small>
+                            <ng-template #ngtvAmount><small class="danger" *ngIf="amount.errors.invalidAmount">Quantity is not valid!</small></ng-template>
+                        </div>
+                </div>
+                <div class="col-sm-3 form-group">
+                    <label for="unit">Unit<span style="color: red;">*</span></label>
+                    <select 
+                        required 
+                        ngModel 
+                        #unit="ngModel" 
+                        name="unit" 
+                        id="unit" 
+                        class="form-control"
+                        [class.is-invalid]="unit.invalid && unit.touched">
+                        <option *ngFor="let unit of units" [value]="unit">{{unit}}</option>
+                    </select>
+                    <small class="danger" *ngIf="unit.invalid && unit.touched">Please add unit!</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button 
+                        type="submit" 
+                        class="btn btn-success" 
+                        [disabled]="shoppingEdit.invalid || shoppingEdit.pristine">{{editMode ? 'Update':'Add'}}</button>
+                    <button 
+                        type="button" 
+                        class="btn btn-danger" 
+                        *ngIf="editMode" 
+                        (click)="ondeleteItem()">Delete</button>
+                    <button type="button" class="btn btn-primary"(click)="onReset()">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

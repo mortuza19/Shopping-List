@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shopping-list';
+  date = new Date();
+
+  time(){
+    // setInterval(()=>{
+    //   this.date = new Date();
+    // },1000)
+    return this.date;
+  }
+  
 }
