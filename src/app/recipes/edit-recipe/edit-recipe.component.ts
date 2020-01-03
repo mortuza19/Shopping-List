@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { Recipe } from 'src/app/Models/recipes-model';
@@ -13,6 +13,7 @@ import{ recipeNameValidator } from '../../shared/validation';
 })
 export class EditRecipeComponent implements OnInit {
 
+  @ViewChild('scrollBottom',{static:false}) scrollBottom:ElementRef;
   editMode : boolean = false;
   units : string[] = ['kg','lit','gm','pcs','ml','pckt'];
   recipeForm : FormGroup;
@@ -77,6 +78,7 @@ export class EditRecipeComponent implements OnInit {
       'unit' : ['',Validators.required]
     });
     this.ingredients.push(control);
+    document.getElementById('scrollBottom').scrollIntoView();
   }
 
   onAddRecipe(){
@@ -106,6 +108,7 @@ export class EditRecipeComponent implements OnInit {
     else{
       this.recipeForm.reset();
       this.ingredients.controls = [];
+      this.router.navigate(['/dashboard']);
     }
   }
 

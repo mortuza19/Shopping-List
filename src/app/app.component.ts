@@ -6,14 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'shopping-list';
-  date = new Date();
-
-  time(){
-    // setInterval(()=>{
-    //   this.date = new Date();
-    // },1000)
-    return this.date;
-  }
-  
+  title = 'shopping-list'; 
 }

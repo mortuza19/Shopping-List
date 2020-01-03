@@ -1,0 +1,35 @@
+body{
+    background-image: url(https://cdn.pixabay.com/photo/2017/02/15/10/39/salad-2068220_960_720.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: bottom;
+    padding-top: 10px;
+}
+
+.center_div{
+    padding-top: none;
+    margin: 0 auto;
+    width:400px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+}
+.form-group{
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+button{
+    margin-left: 7%;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+a{
+    cursor: pointer;
+}
+
+a.login{
+    float: right;
+    padding: 10px;
+}

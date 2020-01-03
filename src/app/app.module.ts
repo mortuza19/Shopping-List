@@ -18,6 +18,11 @@ import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component
 import { ValidatorDirectiveDirective } from './shared/validator-directive.directive'
 import { Validator2 } from './shared/validator2';
 import { CustomPipe } from './shared/customPipe';
+import { LoginComponent } from './login/login.component';
+import { GeneralLayoutComponent } from './general-layout/general-layout.component';
+import { SignupComponent } from './signup/signup.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { SignupConfirmationComponent } from './signup-confirmation/signup-confirmation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +38,12 @@ import { CustomPipe } from './shared/customPipe';
     EditRecipeComponent,
     ValidatorDirectiveDirective,
     Validator2,
-    CustomPipe
+    CustomPipe,
+    LoginComponent,
+    GeneralLayoutComponent,
+    SignupComponent,
+    ForgetPasswordComponent,
+    SignupConfirmationComponent
   ],
   imports: [
     BrowserModule,

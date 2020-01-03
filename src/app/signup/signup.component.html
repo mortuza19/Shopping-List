@@ -1,0 +1,62 @@
+<body>
+    <div class="container-fluid mb-5 center_div">
+        <h2><b>Fill up the below details!</b></h2>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="userName">Username</label>
+                <input
+                    formControlName="name"
+                    type="text" 
+                    id="userName" 
+                    class="form-control" 
+                    placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    formControlName="email"
+                    type="email" 
+                    id="email" 
+                    class="form-control" 
+                    placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    formControlName="password"
+                    type="password" 
+                    id="password" 
+                    class="form-control" 
+                    placeholder="Enter Password">
+            </div>
+            <div class="form-group">
+                <label for="cpassword">Confirm Password</label>
+                <input 
+                    formControlName="cpassword"
+                    type="password" 
+                    id="cpassword" 
+                    class="form-control" 
+                    placeholder="Confirm Password">
+            </div>
+            <div class="form-group">
+                <label for="question">Security Question</label>
+                <select formControlName="question" class="form-control" id="question">
+                    <option *ngFor="let question of securityQuestion" [value]="question">{{question}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="answer">Answer</label>
+                <input 
+                    formControlName="answer"
+                    type="text" 
+                    id="answer" 
+                    class="form-control" 
+                    placeholder="Enter your answer">
+            </div>
+            <div class="row">
+                <button class="btn btn-success" type="submit">Sign up</button>
+                <a class="login" [routerLink]="'../'">Back to Login Page</a>
+            </div>
+        </form>
+    </div>
+</body>
