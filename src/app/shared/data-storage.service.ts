@@ -9,7 +9,9 @@ import { Recipe } from '../Models/recipes-model';
     providedIn:'root'
 })
 export class DataStorageService{
-    constructor(private http:HttpClient, private recipeService: RecipeService){}
+    constructor(
+        private http:HttpClient, 
+        private recipeService: RecipeService,){}
 
     storeRecipies(){
         const recipes = this.recipeService.getAllRecipes();

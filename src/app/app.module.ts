@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,9 @@ import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component
 import { ValidatorDirectiveDirective } from './shared/validator-directive.directive'
 import { Validator2 } from './shared/validator2';
 import { CustomPipe } from './shared/customPipe';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,9 @@ import { CustomPipe } from './shared/customPipe';
     EditRecipeComponent,
     ValidatorDirectiveDirective,
     Validator2,
-    CustomPipe
+    CustomPipe,
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,11 @@ import { CustomPipe } from './shared/customPipe';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide : HTTP_INTERCEPTORS,
+    useClass : AuthInterceptorService,
+    multi : true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
