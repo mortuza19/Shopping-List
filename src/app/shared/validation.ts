@@ -9,7 +9,7 @@ export class Validator{
 
 export function recipeNameValidator(allRecipes:Recipe[]) : ValidatorFn{
     return (control: AbstractControl):{[key:string]:boolean} | null =>{
-        const recipeName = control.value?control.value:'';
+        const recipeName = control.value ? control.value:'';
         for (let index = 0; index < allRecipes.length; index++) {
             const element = allRecipes[index];
             if(element.name.toLowerCase() === recipeName.toLowerCase()){

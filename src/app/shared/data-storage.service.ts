@@ -24,10 +24,13 @@ export class DataStorageService{
     fetchRecipes(){
         return this.http.get<Recipe[]>('https://shopping-list-2b077.firebaseio.com/recipes.json')
         .pipe(map(recipes=>{
+            if(!recipes){
+                return
+            }
             return recipes.map(recipe=>{
                 return{
                     ...recipe,
-                    ingredients : recipe.ingredients?recipe.ingredients:[]
+                    ingredients : recipe.ingredients ? recipe.ingredients : []
                 }
             })
         }),

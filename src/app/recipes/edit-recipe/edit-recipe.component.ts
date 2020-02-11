@@ -100,13 +100,13 @@ export class EditRecipeComponent implements OnInit {
 
   onReset(){
     if(this.index>0){
-      this.router.navigate(['../'],{relativeTo:this.route});
       this.index = -1;
     }
     else{
       this.recipeForm.reset();
       this.ingredients.controls = [];
     }
+    this.router.navigate(['../'],{relativeTo:this.route});
   }
 
   onRemoveingredient(index:number){
