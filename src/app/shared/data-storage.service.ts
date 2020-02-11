@@ -15,6 +15,7 @@ export class DataStorageService{
 
     storeRecipies(){
         const recipes = this.recipeService.getAllRecipes();
+        console.log('hi',recipes);
         this.http.put('https://shopping-list-2b077.firebaseio.com/recipes.json',recipes)
         .subscribe(Response=>{
             console.log(Response);
