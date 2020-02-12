@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  collapsed = true;
   isAuthenticated : boolean = false;
   constructor(private dataStorageService: DataStorageService,private authService:AuthService) { }
 
