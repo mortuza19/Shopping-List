@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
-import { Recipe } from 'src/app/Models/recipes-model';
-import { RecipeService } from 'src/app/shared/recipe.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DataStorageService } from 'src/app/shared/data-storage.service';
+
+import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,32 +11,29 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
+  recipes: Recipe[];
+  subscription: Subscription;
 
-  recipes : Recipe[] = [];
-  subscription : Subscription;
-  constructor(
-    private recipeService : RecipeService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private dataStorageService: DataStorageService
-    ) { }
+  constructor(private recipeService: RecipeService,
+              private router: Router,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.recipes = this.recipeService.getAllRecipes();
-    this.subscription = this.recipeService.recipeAdded.subscribe((recipes)=>{
-      this.recipes = recipes;
-    });
-    if(this.recipes.length === 0){
-      this.dataStorageService.fetchRecipes().subscribe();
-    }
+    this.subscription = this.recipeService.recipesChanged
+      .subscribe(
+        (recipes: Recipe[]) => {
+          this.recipes = recipes;
+        }
+      );
+    this.recipes = this.recipeService.getRecipes();
   }
 
-  onClick(){
-    this.router.navigate(['new'],{relativeTo:this.route})
+  onNewRecipe() {
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }
