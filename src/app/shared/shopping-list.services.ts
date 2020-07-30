@@ -1,6 +1,9 @@
 import { Injectable, OnInit, EventEmitter } from "@angular/core";
 import { Ingredient } from '../Models/ingredients';
 import { Subject } from 'rxjs';
+import { DataStorageService } from './data-storage.service';
+import { tap } from 'rxjs/operators';
+
 
 @Injectable({
     providedIn : 'root'
@@ -8,23 +11,31 @@ import { Subject } from 'rxjs';
 
 export class ShoppingListService implements OnInit{
    
-    private ingredients : Ingredient[]= [
-        new Ingredient('Apple',5,'pcs'),
-        new Ingredient('Sugar',250,'gm')
-    ];
+    private ingredients : Ingredient[];
 
     ingredientAdded = new Subject<Ingredient[]>();
     selectedIngredient = new Subject<number>();
 
+    constructor(
+        private dataStorageService : DataStorageService
+        ){}
+
     ngOnInit(){}
 
     getAllIngredients(){
-        return this.ingredients.slice();
+        return this.dataStorageService.fetchIngredients()
+        .pipe(tap(data=>{
+            this.ingredients = data;
+            this.ingredientAdded.next(this.ingredients);
+        }));
     }
 
     addIngredients(newItem : Ingredient){
-        this.ingredients.push(newItem);
-        this.ingredientAdded.next(this.ingredients.slice());
+        this.dataStorageService.saveIngredients(newItem).subscribe(data=>{
+            alert('Ingredient added to the list!');
+            this.ingredients.push(newItem);
+            this.ingredientAdded.next(this.ingredients);
+        })
     }
 
     addAllIngredients(allIngredients: Ingredient[]){

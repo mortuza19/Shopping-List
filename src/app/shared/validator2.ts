@@ -26,7 +26,7 @@ export function duplicateIngredient(ingredients:Ingredient[]):ValidatorFn{
 export class Validator2 implements Validator {
   validator: ValidatorFn;
   constructor(private shoppingListService: ShoppingListService) {
-    this.validator = duplicateIngredient(this.shoppingListService.getAllIngredients())
+    //this.validator = duplicateIngredient(this.shoppingListService.getAllIngredients())
   }
   validate(c: FormControl) {
     return this.validator(c);
